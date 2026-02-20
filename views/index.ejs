@@ -28,7 +28,7 @@
 <body class="body">
 
     <div class="container clearbg">
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom" id="header"> <a href="/"
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 " id="header"> <a href="/"
                 class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"> 
                 <img src="/assets/images/logo.svg" alt="Logo"> 
                 
@@ -89,22 +89,25 @@
 
 
 
-   <section class="container" id="temperature-info-block">
+   <section class="" id="temperature-info-block">
     
     <main class="weather-info">
-        <!-- Country -->
-        <h3 class="country-name">United States</h3>
-        <!-- Date -->
-        <p class="date">Monday, 12 June 2023</p>
-        <!-- Weather Icon -->
-        <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="weather-icon">
-        <!-- Insert current temperature here -->
-        <h2 class="current-temperature">20<sup>o</sup></h2>
-        <!-- Insert current weather condition here -->
-        <p class="current-weather-condition">Partly cloudy</p>
+        <div class="country-date-info">
+            <!-- Country -->
+            <h3 class="country-name">Berlin, Germany</h3>
+            <!-- Date -->
+            <p class="date">Monday, 12 June 2023</p>
+        </div>
+        <div class="icon-temp-info">
+            <!-- Weather Icon -->
+            <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="weather-icon">
+            <!-- Insert current temperature here -->
+            <h2 class="current-temperature">68<sup>o</sup></h2>
+        </div>
 
     </main>
 
+    
     <div class="hourly-data">
         <h3 class="hourly-data-title">Hourly forecast</h3>
         <div class="hourly-data-values">
@@ -126,7 +129,7 @@
             </div>
         </div>
     </div>
-    
+   
     <div class="sub-info">
     
             <!-- Insert temperature here -->
@@ -164,98 +167,102 @@
             </div>
     </div>
 
-   </section>
-
 <!-- Insert daily forecast for the next 7 days here -->
-<h3 class="forecast-data-title container">Daily forecast</h3>
-<div class=" daily-forecast">
-    <div class="daily-forecast-values">
-        <div class="daily-forecast-item">
-            <p class="daily-forecast-day">Tues</p>
-            <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-            <p class="daily-forecast-temperature">
-                <span>
-                    23<sup>o</sup>
-                </span>
-            
-                <span>
-                    13<sup>o</sup>
-                </span>
-            </p>
-        </div>
-
-        <div class="daily-forecast-item">
-            <p class="daily-forecast-day">Wed</p>
-            <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-            <p class="daily-forecast-temperature">19<sup>o</sup></p>
-        </div>
-        <div class="daily-forecast-item">
-            <p class="daily-forecast-day">Thurs</p>
-            <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-            <p class="daily-forecast-temperature">
-                <span>
-                    23<sup>o</sup>
-                </span>
-            
-                <span>
-                    13<sup>o</sup>
-                </span>
-            </p>
-        </div>
-        <div class="daily-forecast-item">
-            <p class="daily-forecast-day">Fri</p>
-            <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-            <p class="daily-forecast-temperature">
-                <span>
-                    23<sup>o</sup>
-                </span>
-            
-                <span>
-                    13<sup>o</sup>
-                </span>
-            </p>
-        </div>
-        <div class="daily-forecast-item">
-            <p class="daily-forecast-day">Sat</p>
-            <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-            <p class="daily-forecast-temperature">
-                <span>
-                    23<sup>o</sup>
-                </span>
-            
-                <span>
-                    13<sup>o</sup>
-                </span>
-            </p>
-        </div>
-        <div class="daily-forecast-item">
-            <p class="daily-forecast-day">Sun</p>
-            <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-            <p class="daily-forecast-temperature">
-                <span>
-                    23<sup>o</sup>
-                </span>
-            
-                <span>
-                    13<sup>o</sup>
-                </span>
-            </p>
-        </div>
-        <div class="daily-forecast-item">
-            <p class="daily-forecast-day">Mon</p>
-            <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-            <p class="daily-forecast-temperature">
-                <span>
-                    23<sup>o</sup>
-                </span>
-
-                <span>
-                    13<sup>o</sup>
-                </span>
-            </p>
+   
+    <div class="daily-forecast">
+        <h3 class="forecast-data-title container">Daily forecast</h3>
+        <div class="daily-forecast-values">
+            <div class="daily-forecast-item">
+                <p class="daily-forecast-day">Tues</p>
+                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+                <p class="daily-forecast-temperature">
+                    <span>
+                        23<sup>o</sup>
+                    </span>
+    
+                    <span>
+                        13<sup>o</sup>
+                    </span>
+                </p>
+            </div>
+    
+            <div class="daily-forecast-item">
+                <p class="daily-forecast-day">Wed</p>
+                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+                <p class="daily-forecast-temperature">19<sup>o</sup></p>
+            </div>
+            <div class="daily-forecast-item">
+                <p class="daily-forecast-day">Thurs</p>
+                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+                <p class="daily-forecast-temperature">
+                    <span>
+                        23<sup>o</sup>
+                    </span>
+    
+                    <span>
+                        13<sup>o</sup>
+                    </span>
+                </p>
+            </div>
+            <div class="daily-forecast-item">
+                <p class="daily-forecast-day">Fri</p>
+                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+                <p class="daily-forecast-temperature">
+                    <span>
+                        23<sup>o</sup>
+                    </span>
+    
+                    <span>
+                        13<sup>o</sup>
+                    </span>
+                </p>
+            </div>
+            <div class="daily-forecast-item">
+                <p class="daily-forecast-day">Sat</p>
+                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+                <p class="daily-forecast-temperature">
+                    <span>
+                        23<sup>o</sup>
+                    </span>
+    
+                    <span>
+                        13<sup>o</sup>
+                    </span>
+                </p>
+            </div>
+            <div class="daily-forecast-item">
+                <p class="daily-forecast-day">Sun</p>
+                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+                <p class="daily-forecast-temperature">
+                    <span>
+                        23<sup>o</sup>
+                    </span>
+    
+                    <span>
+                        13<sup>o</sup>
+                    </span>
+                </p>
+            </div>
+            <div class="daily-forecast-item">
+                <p class="daily-forecast-day">Mon</p>
+                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+                <p class="daily-forecast-temperature">
+                    <span>
+                        23<sup>o</sup>
+                    </span>
+    
+                    <span>
+                        13<sup>o</sup>
+                    </span>
+                </p>
+            </div>
         </div>
     </div>
-</div>
+
+
+   </section>
+
+
 
  
 <footer>
