@@ -1,0 +1,266 @@
+@import url(https://fonts.googleapis.com/css?family=DM+Sans:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+@import url(https://fonts.googleapis.com/css?family=Bricolage+Grotesque:200,300,regular,500,600,700,800);
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    
+   
+}
+.body {
+    background-color: hsl(243, 96%, 9%);
+    background-size: cover;
+    min-height: 100vh;
+    font-family: 'DM Sans', sans-serif;
+    color: #fff;
+}
+
+
+select:active, select:focus {
+    outline: none;
+    border: none;
+}
+
+select .not-clickable {
+    pointer-events: visiblePainted;
+    color: #999;
+}
+
+
+/* 
+    custom dropdown styles built using prompt from chatgpt
+*/
+
+.custom-dropdown {
+    position: relative;
+    width: 150px;
+    font-family: sans-serif;
+    background: hsl(240, 6%, 70%);
+    border-radius: 10px;
+    
+}
+
+.dropdown-selected {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: hsl(240, 6%, 70%);
+}
+
+.dropdown-selected .icon {
+    width: 18px;
+    margin-right: 8px;
+}
+
+.dropdown-selected span {
+    flex: 1;
+}
+
+.arrow {
+    margin-left: 10px;
+    transition: 0.3s;
+}
+
+.custom-dropdown.active .arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: relative;
+    top: 130%;
+    right: 5%;  
+    width: 250px;
+    background: hsl(240, 6%, 70%);
+    border-radius: 8px;
+    display: none;
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.custom-dropdown.active .dropdown-menu {
+    display: block;
+    background: none;
+}
+
+.dropdown-title {
+    padding: 10px;
+    font-family: 'bricolage grotesque', sans-serif;
+    font-weight: bold;
+    color: #fff;
+    background: hsl(243, 23%, 24%);
+    
+}
+.dropdown-group {
+    background: hsl(243, 23%, 24%);
+    border-bottom: 1px solid hsl(240, 6%, 70%);
+}
+.group-label {
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    color: hsl(240, 6%, 70%);
+  
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #fff !important;
+}
+
+.dropdown-item:hover {   
+    color: hsl(243, 96%, 9%) !important;
+}
+
+/* 
+  custom dropdown styles built using prompt from chatgpt end
+*/
+
+.search-city-block {
+    text-align: center;
+    margin: 100px 0 40px 0;
+}
+
+.search-city-block h1 {
+    font-size: 3.5em;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    margin-bottom: 50px;
+}
+
+.search-city-block form input[type="search"] {
+    padding: 10px 0 10px 45px;
+    width: 40%;
+    border: none;
+    background: hsl(243, 23%, 24%);
+    border-radius: 8px;
+    margin: 0 10px 0 0;
+    font-size: 16px;
+
+}
+
+
+.search-city-block form input[type="search"]:focus {
+    outline: none;
+    color: hsl(0, 0%, 100%);
+    border: 1px solid hsl(0, 0%, 100%);
+    background: hsl(243, 23%, 24%);
+    
+}
+
+.search-city-block form input[type="search"]:hover {
+    color: hsl(0, 0%, 100%);
+    border: 1px solid hsl(0, 0%, 100%);
+    background: hsl(243, 23%, 24%);
+    transition: all 0.8s ease;
+    
+}
+
+.search-icon {
+    position: absolute;
+    top: 38vh;
+    left: 28%;
+    
+}
+.search-city-block form input::placeholder {
+    color: hsl(0, 0%, 100%);
+
+}
+
+
+.search-city-block form button {
+    width: 130px;
+    height: 40px;
+    border: none;
+    background: hsl(233, 67%, 56%);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-city-block form button:hover {
+    background: hsl(248, 70%, 36%);
+    transition: background 0.8s ease;
+}
+
+/* 
+    temperature-info-block
+ */
+
+#temperature-info-block {
+    display: grid;
+    grid-template-columns: 4fr repeat(1, 1fr);
+    grid-template-rows: 1fr ;
+ 
+}
+
+.sub-info {
+    display: flex;
+    flex-direction: row;
+    grid-row: span 3;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+/*
+     Special
+ */
+
+ .hourly-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 20px;
+
+ }
+
+  .hourly-data div {
+    width: 30%;
+  }
+
+  .hourly-data div img {
+    width: 30%;
+  }
+
+  .forecast-data-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.5em;
+    font-weight: 300;
+    margin: 25px 0 20px 0;
+  }
+  .daily-forecast .daily-forecast-values {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    margin-top: 30px;
+    padding: 10px 0px 20px 20px;
+  
+  }
+ .daily-forecast-values {
+    
+ }
+  
+   .daily-forecast-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+   }
+
+.daily-forecast-item .daily-forecast-temperature {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 20px;
+    
+}
+   .daily-forecast div img {
+    width: 30%;
+   }
