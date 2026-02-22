@@ -17,7 +17,9 @@ app.get('/', (req, res) => {
 // Handle form submission
 app.post('/search', async (req, res) => {
   const cityName = req.body.city;
-  const resultCount = 1;
+  let resultCount = 1; // Limit the number of results to 1 for simplicity
+  const options = { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' };
+                    
   let startDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
   let endDate = startDate; // Set end date to the same as start date for current weather data
   
@@ -25,29 +27,39 @@ app.post('/search', async (req, res) => {
   console.log(`Received city name: ${cityName}`);
 
   try {
+    // API call to get latitude and longitude for the city using the geocoding API
+  
     const result = await axios.get(
       `https://geocoding-api.open-meteo.com/v1/search?count=${resultCount}&name=${cityName}`
     );
 
     console.log('Geocoding API response:', result.data.results[0]);
+    // create a variable to store the latitude and longitude from the geocoding API response
+    // This will be used to make the second API call to get the weather data for the specific location.
     const { latitude, longitude, timezone } = result.data.results[0];
     console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Timezone: ${timezone}`);
 
     const weatherResult = await axios.get(
-      `https://archive-api.open-meteo.com/v1/archive?latitude=${latitude}&longitude=${longitude}&start_date=${startDate}&end_date=${endDate}&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max,temperature_2m_mean,apparent_temperature_max,relative_humidity_2m_max&timezone=auto`
+      // Only accept latitude, and longitude to get a location-specific weather data.
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=wind_speed_10m_max,precipitation_sum,temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_mean&hourly=temperature_2m,wind_speed_10m&current=temperature_2m,relative_humidity_2m,precipitation,apparent_temperature,wind_speed_10m&timezone=auto`
     );
 
+    console.log('Weather API response:', weatherResult.data);
+    
     const weather = weatherResult.data;
-   
+    const date = new Date(weather.current.time);
+
+
+    console.log('Current time:', weather.daily.time);
 
     res.render('index.ejs', {
       result: result.data.results[0],
       weather,
+      longDate: date.toLocaleDateString('en-US', options),
       error: null
 
     });
     
-    console.log(weather);
 
   } catch (error) {
     res.render('index.ejs', { weather: null, error: 'City not found' });

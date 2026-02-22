@@ -38,7 +38,7 @@
                 <div class="custom-dropdown" id="unitsDropdown">
             
                     <!-- Hidden input (important for form submit) -->
-                    <input type="hidden" name="units" id="unitsValue" form="search-form">
+                    <input type="hidden" name="units" id="unitsValue" form="search-form" required>
             
                     <!-- Selected Display -->
                     <div class="dropdown-selected">
@@ -102,14 +102,15 @@
             
             <!-- Date -->
             <p class="date">
-                  <%= weather.daily.time[0] %>
+                <%= longDate %>
             </p>
         </div>
         <div class="icon-temp-info">
             <!-- Weather Icon -->
             <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="weather-icon">
             <!-- Insert current temperature here -->
-            <h2 class="current-temperature"><%= weather.daily.temperature_2m_max[0] %><sup class="daily_temp_unit">o</sup>
+            <h2 class="current-temperature">
+                 <%= weather.current.temperature_2m %> <sup class="daily_temp_unit">o</sup>
             </h2>
         </div>
 
@@ -145,7 +146,8 @@
                <h3 class="sub-data-title">Feels like</h3>
                <div class="sub-data-value">
                 <!-- Insert "feels like" temperature here -->
-                    <%= weather.daily.apparent_temperature_max[0] %><sup>o</sup>
+                 <p><%= weather.current.apparent_temperature %>°</p>
+                    
              </div>
             </div>
     
@@ -153,27 +155,25 @@
             <div class="sub-data">
                 <h3 class="sub-data-title">Humidity</h3>
                 <div class="sub-data-value">
-    
-                <%= weather.daily.relative_humidity_2m_max[0] %><span class="daily_units"><%= weather.daily_units.relative_humidity_2m_max %></span>
+                    <!-- Insert humidity percentage here -->
+                    <p><%= weather.current.relative_humidity_2m %>%</p>
                </div>
             </div>
     
             <!-- Insert wind here -->
              <div class="sub-data">
-             <h3 class="sub-data-title">Wind</h3>
-             <%if (weather.daily.wind_speed_10m_max) { %>
+             <h3 class="sub-data-title">Wind</h3>             
              <div class="sub-data-value">
-                <%= weather.daily.wind_speed_10m_max[0] %>
-                 <span class="daily_units"><%= weather.daily_units.wind_speed_10m_max %></span>
+                <p><%= weather.current.wind_speed_10m %> km/h</p>
             </div>
-            <% } %>
+           
              
              </div>
     
              <div class="sub-data">
             <h3 class="sub-data-title">Precipitation</h3>
             <div class="sub-data-value">
-              <%= weather.daily.precipitation_sum[0] %> <span class="daily_units"><%= weather.daily_units.precipitation_sum %></span>
+                 <p><%= weather.current.precipitation %> mm</p>
             </div>
             </div>
     </div>
@@ -183,39 +183,40 @@
     <div class="daily-forecast">
         <h3 class="forecast-data-title container">Daily forecast</h3>
         <div class="daily-forecast-values">
-            <div class="daily-forecast-item">
-                <p class="daily-forecast-day">Tues</p>
-                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-                <p class="daily-forecast-temperature">
-                    <span>
-                        23<sup>o</sup>
-                    </span>
     
-                    <span>
-                        13<sup>o</sup>
-                    </span>
-                </p>
-            </div>
-    
-            <div class="daily-forecast-item">
-                <p class="daily-forecast-day">Wed</p>
-                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-                <p class="daily-forecast-temperature">19<sup>o</sup></p>
-            </div>
-            <div class="daily-forecast-item">
-                <p class="daily-forecast-day">Thurs</p>
-                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-                <p class="daily-forecast-temperature">
-                    <span>
-                        23<sup>o</sup>
-                    </span>
-    
-                    <span>
-                        13<sup>o</sup>
-                    </span>
-                </p>
-            </div>
-            <div class="daily-forecast-item">
+         <%if (weather && weather.daily && weather.daily.time) { %>
+            <%weather.daily.time.forEach((day, index) => { %>
+                <div class="daily-forecast-item">
+                    <p class="daily-forecast-day">
+                        <%= new Date(day).toLocaleDateString('en-US', { weekday: 'short' }) %>
+                    </p>
+                    <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+                    <p class="daily-forecast-temperature">
+                        <span>
+                            <%= weather.daily.temperature_2m_max[index] %><sup>o</sup>
+                        </span>
+
+                        <span>
+                        <%= weather.daily.temperature_2m_min[index] %><sup>o</sup>
+                        </span>
+                    </p>
+                </div>
+                <!-- <div class="daily-forecast-item">
+                    <p class="daily-forecast-day">Thurs</p>
+                    <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+                    <p class="daily-forecast-temperature">
+                        <span>
+                            23<sup>o</sup>
+                        </span>
+                
+                        
+                    </p>
+                </div> -->
+                <% }) %>
+        <% } %>
+
+          
+            <!-- <div class="daily-forecast-item">
                 <p class="daily-forecast-day">Fri</p>
                 <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
                 <p class="daily-forecast-temperature">
@@ -269,7 +270,7 @@
             </div>
         </div>
     </div>
-
+  -->
 
    </section>
 
