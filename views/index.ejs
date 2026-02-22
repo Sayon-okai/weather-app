@@ -81,7 +81,7 @@
     <div class="search-city-block container">
     
         <h1>How's the sky looking today?</h1>
-        <form action="" name="search-form" method="get" id="search-form">
+        <form action="/search" name="search-form" method="post" id="search-form">
         <img src="/assets/images/icon-search.svg" alt="search-icon" class="search-icon"> <input type="search" name="city" placeholder="Search for a place..." class="search-input" required>
             <button type="submit">Search</button>
         </form>
@@ -94,15 +94,23 @@
     <main class="weather-info">
         <div class="country-date-info">
             <!-- Country -->
-            <h3 class="country-name">Berlin, Germany</h3>
+            <% if (locals.result) { %>
+            <h3 class="country-name">
+                <%= result.name %>, <%= result.country %>
+            </h3>
+          <% } %>
+            
             <!-- Date -->
-            <p class="date">Monday, 12 June 2023</p>
+            <p class="date">
+                  <%= weather.daily.time[0] %>
+            </p>
         </div>
         <div class="icon-temp-info">
             <!-- Weather Icon -->
             <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="weather-icon">
             <!-- Insert current temperature here -->
-            <h2 class="current-temperature">68<sup>o</sup></h2>
+            <h2 class="current-temperature"><%= weather.daily.temperature_2m_max[0] %><sup class="daily_temp_unit">o</sup>
+            </h2>
         </div>
 
     </main>
@@ -137,7 +145,7 @@
                <h3 class="sub-data-title">Feels like</h3>
                <div class="sub-data-value">
                 <!-- Insert "feels like" temperature here -->
-                    18<sup>o</sup>
+                    <%= weather.daily.apparent_temperature_max[0] %><sup>o</sup>
              </div>
             </div>
     
@@ -146,23 +154,26 @@
                 <h3 class="sub-data-title">Humidity</h3>
                 <div class="sub-data-value">
     
-                46<span>%</span>
+                <%= weather.daily.relative_humidity_2m_max[0] %><span class="daily_units"><%= weather.daily_units.relative_humidity_2m_max %></span>
                </div>
             </div>
     
             <!-- Insert wind here -->
              <div class="sub-data">
              <h3 class="sub-data-title">Wind</h3>
+             <%if (weather.daily.wind_speed_10m_max) { %>
              <div class="sub-data-value">
-    
-             14<span>km/h</span>
+                <%= weather.daily.wind_speed_10m_max[0] %>
+                 <span class="daily_units"><%= weather.daily_units.wind_speed_10m_max %></span>
             </div>
+            <% } %>
+             
              </div>
     
              <div class="sub-data">
             <h3 class="sub-data-title">Precipitation</h3>
             <div class="sub-data-value">
-              0<span>mm</span>
+              <%= weather.daily.precipitation_sum[0] %> <span class="daily_units"><%= weather.daily_units.precipitation_sum %></span>
             </div>
             </div>
     </div>
