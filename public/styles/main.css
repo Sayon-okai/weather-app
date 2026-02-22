@@ -14,6 +14,15 @@
     Custom General styles 
 */
 
+.error-message {
+    color: hsl(0, 0%, 100%);
+    padding: 15px 25px;
+    border-radius: 8px;
+    margin: 20px 0 40vh 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.2em;
+    animation: fadeIn 0.3s ease forwards;
+}
    /*   Custom Style Slide up animation */
    @keyframes fadeIn {
     from {
@@ -215,6 +224,14 @@ select .not-clickable {
     transition: background 0.8s ease;
 }
 
+.search-cities-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: hsl(240, 11%, 95%);
+    gap: 20px;
+    margin-top: 30px;
+}
 
 /* 
    weather-info  Main Hero Block
@@ -427,6 +444,22 @@ select .not-clickable {
     gap: 10px;
     
 }
+.daily-forecast-item .daily-forecast-temperature .min-temp {
+   color: hsl(240, 6%, 70%);
+    
+}
+.daily-forecast-item .daily-forecast-temperature .max-temp {
+    font-weight: 700;
+    
+}
+.daily-forecast-day {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.2em;
+    font-weight: 800;
+    color: #fff;
+}
+
+
 .daily-forecast .daily-weather-icon {
     width: 50%;
  }

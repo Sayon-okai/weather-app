@@ -10,13 +10,15 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.render('index', { weather: null, error: null });
+  res.render('index', { weather: null, error: 'No search results found' });
 });
 
 
 // Handle form submission
 app.post('/search', async (req, res) => {
   const cityName = req.body.city;
+  const temperatureUnit = req.body.units || 'celsius'; // Default to Celsius if not provided
+  console.log(`Received temperature unit: ${temperatureUnit}`);
   let resultCount = 1; // Limit the number of results to 1 for simplicity
   const options = { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' };
                     
@@ -41,9 +43,9 @@ app.post('/search', async (req, res) => {
 
     const weatherResult = await axios.get(
       // Only accept latitude, and longitude to get a location-specific weather data.
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=wind_speed_10m_max,precipitation_sum,temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_mean&hourly=temperature_2m,wind_speed_10m&current=temperature_2m,relative_humidity_2m,precipitation,apparent_temperature,wind_speed_10m&timezone=auto`
+      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&daily=wind_speed_10m_max,precipitation_sum,temperature_2m_max,temperature_2m_min,temperature_2m_mean,apparent_temperature_mean,weather_code&hourly=temperature_2m,wind_speed_10m&current=temperature_2m,relative_humidity_2m,precipitation,apparent_temperature,wind_speed_10m&timezone=auto&temperature_unit=${temperatureUnit}`
     );
-
+  
     console.log('Weather API response:', weatherResult.data);
     
     const weather = weatherResult.data;
@@ -62,7 +64,7 @@ app.post('/search', async (req, res) => {
     
 
   } catch (error) {
-    res.render('index.ejs', { weather: null, error: 'City not found' });
+    res.render('index.ejs', { weather: null, error: 'No search results found' });
   }
 });
 

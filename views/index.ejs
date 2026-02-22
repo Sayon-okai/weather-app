@@ -54,8 +54,8 @@
             
                         <div class="dropdown-group">
                             <div class="group-label">Temperature</div>
-                            <div class="dropdown-item" data-value="Celsius">Celsius (°C)</div>
-                            <div class="dropdown-item" data-value="Fahrenheit">Fahrenheit (°F)</div>
+                            <div class="dropdown-item" data-value="celsius">Celsius (°C)</div>
+                            <div class="dropdown-item" data-value="fahrenheit">Fahrenheit (°F)</div>
                         </div>
             
                         <div class="dropdown-group">
@@ -66,7 +66,7 @@
             
                         <div class="dropdown-group">
                             <div class="group-label">Precipitation</div>
-                            <div class="dropdown-item" data-value="Millimeters">Millimeters (mm)</div>
+                            <div class="dropdown-item" data-value="millimeters">Millimeters (mm)</div>
                             <div class="dropdown-item" data-value="Inches">Inches (in)</div>
                         </div>
             
@@ -81,13 +81,34 @@
     <div class="search-city-block container">
     
         <h1>How's the sky looking today?</h1>
-        <form action="/search" name="search-form" method="post" id="search-form">
-        <img src="/assets/images/icon-search.svg" alt="search-icon" class="search-icon"> <input type="search" name="city" placeholder="Search for a place..." class="search-input" required>
+    <form action="/search" method="post" id="search-form">
+        <div class="search-wrapper">
+            <img src="/assets/images/icon-search.svg" class="search-icon">
+            <input type="search" name="city" placeholder="Search for a place..." class="search-input" required>
             <button type="submit">Search</button>
-        </form>
+        </div>
+    
+        <ul class="matching_city"></ul>
+    </form>
+       
+               
+        
+   
+            <%if (error) { %>
+          
+                <div class="error-message">
+                    <p><%= error %>!</p>
+                </div>
+        <% } %>
+
+           
     </div>
 
+  
 
+
+ <%if (weather) { %>
+     
 
    <section class="" id="temperature-info-block">
     
@@ -106,8 +127,8 @@
             </p>
         </div>
         <div class="icon-temp-info">
-            <!-- Weather Icon -->
-            <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="weather-icon">
+            <!-- Weather Icon -->    
+            <img src="<%= locals.iconSrc %>" alt="Weather Icon" class="weather-icon">
             <!-- Insert current temperature here -->
             <h2 class="current-temperature">
                  <%= weather.current.temperature_2m %> <sup class="daily_temp_unit">o</sup>
@@ -123,7 +144,7 @@
             <!-- Insert hourly forecast for the next 24 hours here -->
             <div class="hourly-data-item">
                 <p class="hourly-time">1 PM</p>
-                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="hourly-weather-icon">
+                <img src="" alt="Weather Icon" class="hourly-weather-icon">
                 <p class="hourly-temperature">20<sup>o</sup></p>
             </div>
             <div class="hourly-data-item">
@@ -184,23 +205,54 @@
         <h3 class="forecast-data-title container">Daily forecast</h3>
         <div class="daily-forecast-values">
     
-         <%if (weather && weather.daily && weather.daily.time) { %>
+         <%if (weather && weather.daily.time) { %>
             <%weather.daily.time.forEach((day, index) => { %>
                 <div class="daily-forecast-item">
                     <p class="daily-forecast-day">
                         <%= new Date(day).toLocaleDateString('en-US', { weekday: 'short' }) %>
                     </p>
-                    <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
+
+                    <% 
+                       const weatherCode = weather.daily.weather_code[index];
+                       var iconSrc = '/assets/images/icon-partly-cloudy.webp'; // Default icon
+                        if (weatherCode >= 0 && weatherCode <= 19) {
+                            iconSrc =  '/assets/images/icon-sunny.webp';
+                        } else if (weatherCode >= 20 && weatherCode <= 29) {
+                            iconSrc = '/assets/images/icon-rain.webp';
+                        } else if (weatherCode >= 30 && weatherCode <= 39) {
+                            iconSrc = '/assets/images/icon-storm.webp';
+                        }
+                        else if (weatherCode >= 40 && weatherCode <= 49) {
+                            iconSrc = '/assets/images/icon-fog.webp';
+                        } else if (weatherCode >= 50 && weatherCode <= 59) {
+                            iconSrc = '/assets/images/icon-drizzle.webp';
+                        } else if (weatherCode >= 60 && weatherCode <= 69) {
+                            iconSrc = '/assets/images/icon-rain.webp';
+                        } else if (weatherCode >= 70 && weatherCode <= 79) {
+                            iconSrc = '/assets/images/icon-snow.webp';
+                        } else if (weatherCode >= 80 && weatherCode <= 89) {
+                            iconSrc = '/assets/images/icon-rain.webp';
+                        } else if (weatherCode >= 95 && weatherCode <= 99) {
+                            iconSrc = '/assets/images/icon-storm.webp';
+                        }
+                    %>
+
+
+
+                    <img src="<%= iconSrc %>" alt="Weather Icon" class="daily-weather-icon">
+
                     <p class="daily-forecast-temperature">
-                        <span>
-                            <%= weather.daily.temperature_2m_max[index] %><sup>o</sup>
+                        <span class="max-temp">
+                            <%= Math.round(weather.daily.temperature_2m_max[index]) %><sup>o</sup>
                         </span>
 
-                        <span>
-                        <%= weather.daily.temperature_2m_min[index] %><sup>o</sup>
+                        <span class="min-temp">
+                        <%= Math.round(weather.daily.temperature_2m_min[index]) %><sup>o</sup>
                         </span>
                     </p>
                 </div>
+            <% }) %>
+         <% } %>
                 <!-- <div class="daily-forecast-item">
                     <p class="daily-forecast-day">Thurs</p>
                     <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
@@ -212,71 +264,15 @@
                         
                     </p>
                 </div> -->
-                <% }) %>
-        <% } %>
+           
+           </div>
+         </div>
+    </section>
 
-          
-            <!-- <div class="daily-forecast-item">
-                <p class="daily-forecast-day">Fri</p>
-                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-                <p class="daily-forecast-temperature">
-                    <span>
-                        23<sup>o</sup>
-                    </span>
+    <% } %>
     
-                    <span>
-                        13<sup>o</sup>
-                    </span>
-                </p>
-            </div>
-            <div class="daily-forecast-item">
-                <p class="daily-forecast-day">Sat</p>
-                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-                <p class="daily-forecast-temperature">
-                    <span>
-                        23<sup>o</sup>
-                    </span>
-    
-                    <span>
-                        13<sup>o</sup>
-                    </span>
-                </p>
-            </div>
-            <div class="daily-forecast-item">
-                <p class="daily-forecast-day">Sun</p>
-                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-                <p class="daily-forecast-temperature">
-                    <span>
-                        23<sup>o</sup>
-                    </span>
-    
-                    <span>
-                        13<sup>o</sup>
-                    </span>
-                </p>
-            </div>
-            <div class="daily-forecast-item">
-                <p class="daily-forecast-day">Mon</p>
-                <img src="/assets/images/icon-partly-cloudy.webp" alt="Weather Icon" class="daily-weather-icon">
-                <p class="daily-forecast-temperature">
-                    <span>
-                        23<sup>o</sup>
-                    </span>
-    
-                    <span>
-                        13<sup>o</sup>
-                    </span>
-                </p>
-            </div>
-        </div>
-    </div>
-  -->
 
-   </section>
-
-
-
- 
+        
 <footer>
     
         <div class="attribution">
