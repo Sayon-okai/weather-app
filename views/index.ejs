@@ -84,22 +84,33 @@
     <form action="/search" method="post" id="search-form">
         <div class="search-wrapper">
             <img src="/assets/images/icon-search.svg" class="search-icon">
-            <input type="search" name="city" placeholder="Search for a place..." class="search-input" required>
+            <input type="search" name="city" placeholder="Search for a place..." class="search-input" autocomplete="off" required>
             <button type="submit">Search</button>
         </div>
     
         <ul class="matching_city"></ul>
     </form>
-       
                
-        
-   
-            <%if (error) { %>
           
-                <div class="error-message">
-                    <p><%= error %>!</p>
+                <div class="no-result-message">
+                    <p><%= noResult %>!</p>
                 </div>
-        <% } %>
+     
+   
+        <%if (error) { %>
+        
+            <div class="error-message">
+                <img src="/assets/images/icon-error.svg" alt="error Icon" >
+                <p>
+                    <%=  %>!
+                </p>
+
+                <a href="/">
+                    <img src="/assets/images/icon-retry.svg" alt="Retry Icon"> Retry
+                </a>
+            </div>
+              
+            <% } %>
 
            
     </div>

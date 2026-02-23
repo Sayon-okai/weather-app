@@ -12,18 +12,21 @@
 /* 
     Custom General styles 
 */
-
+.hidden {
+    display: none;
+}
 /* City names suggestion Drop Down  */
 .matching_city {
     list-style: none;
     padding: 0;
     margin: 20px 0 0 21%;
-    border: 1px solid #ccc;
+    border: none;
     max-height: 200px;
     overflow-y: auto;
     position: absolute;
-    background: white;
+    background: hsl(243, 23%, 24%);
     width: 34%;
+    font-family: 'DM Sans' sans-serif;
 }
 
 .matching_city li:hover {
@@ -186,7 +189,7 @@ select .not-clickable {
 .search-city-block form input[type="search"] {
     padding: 10px 0 10px 45px;
     width: 40%;
-    border: none;
+    border: none;  
     background: hsl(243, 23%, 24%);
     border-radius: 8px;
     margin: 0 10px 0 0;

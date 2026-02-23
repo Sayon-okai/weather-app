@@ -10,7 +10,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.render('index', { weather: null, error: 'No search results found' });
+  res.render('index', {
+    weather: null, noResult: 'No search results found', 
+     error: `We couldn't connect to the server (API error), Please
+        try again in few moments.`
+  });
 });
 
 
@@ -64,7 +68,12 @@ app.post('/search', async (req, res) => {
     
 
   } catch (error) {
-    res.render('index.ejs', { weather: null, error: 'No search results found' });
+    res.render('index.ejs', {
+      weather: null, error: `We couldn't connect to the server (API error), Please
+        try again in few moments.
+      `,
+       noResult: 'No search results found'
+    });
   }
 });
 
