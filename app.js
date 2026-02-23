@@ -11,9 +11,8 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => {
   res.render('index', {
-    weather: null, noResult: 'No search results found', 
-     error: `We couldn't connect to the server (API error), Please
-        try again in few moments.`
+    weather: null, noResult: 'No search results found!', 
+     error: null
   });
 });
 
@@ -61,6 +60,7 @@ app.post('/search', async (req, res) => {
     res.render('index.ejs', {
       result: result.data.results[0],
       weather,
+      noResult: 'No search results found!',
       longDate: date.toLocaleDateString('en-US', options),
       error: null
 
@@ -69,10 +69,11 @@ app.post('/search', async (req, res) => {
 
   } catch (error) {
     res.render('index.ejs', {
-      weather: null, error: `We couldn't connect to the server (API error), Please
+      weather: null,
+      error: `We couldn't connect to the server (API error), Please
         try again in few moments.
       `,
-       noResult: 'No search results found'
+      noResult: null
     });
   }
 });

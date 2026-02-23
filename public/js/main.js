@@ -65,7 +65,8 @@ cityInput.addEventListener("input", async () => {
       });
 
        
-      
+    const errorMsg = document.querySelector('.no-result-message');
+    errorMsg.classList.add('hidden')
       matchingCities.appendChild(li);
     });
 
@@ -73,13 +74,13 @@ cityInput.addEventListener("input", async () => {
      
     console.error("Error:", error);
   }
-})
+});
 
 cityInput.addEventListener('keydown', (e) => {
   if (e.key === 'Backspace' || e.key === 'Delete') {
-    const errorMsg = document.querySelector('.error-message');
+    const errorMsg = document.querySelector('.no-result-message');
     errorMsg.classList.add('hidden')
   } else {
-        
+        errorMsg.classList.remove('hidden')
   }
 })

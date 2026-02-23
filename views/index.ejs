@@ -93,16 +93,16 @@
                
           
                 <div class="no-result-message">
-                    <p><%= noResult %>!</p>
+                    <p><%= noResult %></p>
                 </div>
      
    
         <%if (error) { %>
         
-            <div class="error-message">
+            <div class="api-error-message">
                 <img src="/assets/images/icon-error.svg" alt="error Icon" >
                 <p>
-                    <%=  %>!
+                    <%= error %>!
                 </p>
 
                 <a href="/">

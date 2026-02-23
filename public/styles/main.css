@@ -32,7 +32,7 @@
 .matching_city li:hover {
     background: #f0f0f0;
 }
-.error-message {
+.no-result-message {
     color: hsl(0, 0%, 100%);
     padding: 15px 25px;
     border-radius: 8px;
@@ -41,6 +41,14 @@
     font-size: 1.2em;
     animation: fadeIn 0.3s ease forwards;
 }
+
+.api-error-message {
+     width: 40%;
+     position: absolute;
+     top: 50vh;
+     left: 23%;
+}
+
    /*   Custom Style Slide up animation */
    @keyframes fadeIn {
     from {
