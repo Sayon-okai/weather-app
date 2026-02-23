@@ -14,7 +14,8 @@
 */
 /* Loader CSS Rule */
 .loader {
-    width: 32px;
+    width: 16px;
+    margin-right: 10px;
     animation: spin 2s linear infinite ;
     
 }
