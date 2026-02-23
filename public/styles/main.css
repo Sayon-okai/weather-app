@@ -56,7 +56,8 @@
     color: hsl(0, 0%, 100%);
     padding: 15px 25px;
     border-radius: 8px;
-    margin: 20px 0 40vh -125px;
+    margin: 20px 0 0 -125px;
+    max-height: fit-content;
     font-family: 'DM Sans', sans-serif;
     text-align: center;
     font-weight: 800 !important;

@@ -85,24 +85,23 @@
         <div class="search-wrapper">
             <img src="/assets/images/icon-search.svg" class="search-icon">
             <input type="search" name="city" placeholder="Search for a place..." class="search-input" autocomplete="off" required>
-            <button type="submit">Search</button>
+            <button type="submit" class="search-btn">Search</button>
         </div>
     
         <ul class="matching_city hidden">
-            <li class="progress hidden">
-                <p id="search-in-progress">
-                    <img src="/assets/images/icon-loading.svg" alt="loading" class="loading-icon"> Search in progress
-                </p>
-            </li>
+            <!-- Dynamic content  -->
         </ul>
 
     </form>
                
-          
-                <div class="no-result-message">
-                    <p><%= noResult %></p>
-                </div>
-     
+         <%if (!weather) { %>
+             <div class="no-result-message">
+            
+                <p><%= noResult %></p>
+            
+            </div>   
+        <% } %>
+           
       
     </div>
 
@@ -272,7 +271,7 @@
     
 
         
-<footer class="home-footer">
+<footer class="home-footer hidden">
     
         <div class="attribution">
             Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
