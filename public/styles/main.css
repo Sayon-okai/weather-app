@@ -6,14 +6,29 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    
-   
+      
 }
 
 /* 
     Custom General styles 
 */
 
+/* City names suggestion Drop Down  */
+.matching_city {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0 21%;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    position: absolute;
+    background: white;
+    width: 34%;
+}
+
+.matching_city li:hover {
+    background: #f0f0f0;
+}
 .error-message {
     color: hsl(0, 0%, 100%);
     padding: 15px 25px;

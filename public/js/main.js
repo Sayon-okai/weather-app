@@ -1,4 +1,4 @@
-import { json } from "express";
+
 
 // Custom dropdown for units selection built using prompt code from ChatGPT. It replaces the default select element with a custom dropdown for better styling and user experience.
 const dropdown = document.getElementById("unitsDropdown");
@@ -24,6 +24,46 @@ items.forEach(item => {
 document.addEventListener("click", (e) => {
   if (!dropdown.contains(e.target)) {
     dropdown.classList.remove("active");
+  }
+});
+
+const cityInput = document.querySelector(".search-input");
+const matchingCities = document.querySelector(".matching_city");
+
+cityInput.addEventListener("input", async () => {
+  const query = cityInput.value.trim();
+  matchingCities.innerHTML = "";
+
+  if (query.length < 2) return;
+
+  try {
+    const response = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5`
+    );
+
+    const data = await response.json();
+
+    if (!data.results) {
+      matchingCities.innerHTML = "<li>No results</li>";
+      return;
+    }
+
+    data.results.forEach(city => {
+      const li = document.createElement("li");
+      li.textContent = `${city.name}, ${city.country}`;
+      li.style.cursor = "pointer";
+      li.style.padding = "5px";
+
+      li.addEventListener("click", () => {
+        cityInput.value = city.name;
+        matchingCities.innerHTML = "";
+      });
+
+      matchingCities.appendChild(li);
+    });
+
+  } catch (error) {
+    console.error("Error:", error);
   }
 });
 
