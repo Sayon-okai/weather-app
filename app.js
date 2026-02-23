@@ -68,7 +68,7 @@ app.post('/search', async (req, res) => {
     
 
   } catch (error) {
-    res.render('index.ejs', {
+    res.render('error.ejs', {
       weather: null,
       error: `We couldn't connect to the server (API error), Please
         try again in few moments.

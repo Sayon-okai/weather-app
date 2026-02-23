@@ -88,7 +88,14 @@
             <button type="submit">Search</button>
         </div>
     
-        <ul class="matching_city"></ul>
+        <ul class="matching_city hidden">
+            <li class="progress hidden">
+                <p id="search-in-progress">
+                    <img src="/assets/images/icon-loading.svg" alt="loading" class="loading-icon"> Search in progress
+                </p>
+            </li>
+        </ul>
+
     </form>
                
           
@@ -96,27 +103,8 @@
                     <p><%= noResult %></p>
                 </div>
      
-   
-        <%if (error) { %>
-        
-            <div class="api-error-message">
-                <img src="/assets/images/icon-error.svg" alt="error Icon" >
-                <p>
-                    <%= error %>!
-                </p>
-
-                <a href="/">
-                    <img src="/assets/images/icon-retry.svg" alt="Retry Icon"> Retry
-                </a>
-            </div>
-              
-            <% } %>
-
-           
+      
     </div>
-
-  
-
 
  <%if (weather) { %>
      
@@ -284,7 +272,7 @@
     
 
         
-<footer>
+<footer class="home-footer">
     
         <div class="attribution">
             Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.

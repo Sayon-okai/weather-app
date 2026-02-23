@@ -84,24 +84,26 @@
         <%if (error) { %>
 
          <div class="api-error-message">
-                <img src="/assets/images/icon-error.svg" alt="error Icon">
-                <p>
-                    <%= error %>!
-                </p>
+                <img src="/assets/images/icon-error.svg" alt="error Icon" class="api-error-icon">
+                <h1 class="error-warning">Something went wrong</h1>
+                  <p>
+                     <%= error %>
+                  </p>
 
-                <a href="/">
-                    <img src="/assets/images/icon-retry.svg" alt="Retry Icon"> Retry
+                 <a href="/">
+                    <img src="/assets/images/icon-retry.svg" alt="Retry Icon" class="icon-retry"> &nbsp; Retry
                 </a>
          </div>
 
+      <%  } %>
 
 
             <footer>
 
-                <div class="attribution">
+                <!-- <div class="attribution">
                     Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
                     Coded by <a href="#">Your Name Here</a>.
-                </div>
+                </div> -->
 
             </footer>
 

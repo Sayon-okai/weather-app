@@ -29,15 +29,28 @@ document.addEventListener("click", (e) => {
 
 const cityInput = document.querySelector(".search-input");
 const matchingCities = document.querySelector(".matching_city");
+const noResultMsg = document.querySelector('.no-result-message');
+const homeFooter = document.querySelector('.home-footer');
+const loaderIcon = document.querySelector('.loading-icon');
+const progress = document.querySelector('.progress')
 
      
 
 cityInput.addEventListener("input", async () => {
   const query = cityInput.value.trim();
   matchingCities.innerHTML = "";
+  matchingCities.classList.add('hidden');
+  noResultMsg.classList.remove('hidden');
+  homeFooter.classList.remove('hidden');
+  
+
 
   if (query.length < 2) return;
-
+  matchingCities.classList.remove('hidden');
+  noResultMsg.classList.add('hidden');
+  homeFooter.classList.add('hidden')
+  
+  
   try {
     const response = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=5`
@@ -46,13 +59,23 @@ cityInput.addEventListener("input", async () => {
     const data = await response.json();
 
     if (!data.results) {
-      matchingCities.innerHTML = "<li>No results</li>";
+    
+       matchingCities.innerHTML = `<li class="">
+                <p id="search-in-progress">
+                    <img src="/assets/images/icon-loading.svg" alt="loading" class="loading-icon loader"> Search in progress
+                </p>
+            </li>`
+        
+       
+     
       return;
-      
+    
     }
+
 
    
 
+  
     data.results.forEach(city => {
       const li = document.createElement("li");
       li.textContent = `${city.name}, ${city.country}`;
@@ -62,25 +85,15 @@ cityInput.addEventListener("input", async () => {
       li.addEventListener("click", () => {
         cityInput.value = city.name;
         matchingCities.innerHTML = "";
+        matchingCities.classList.add('hidden')
       });
 
-       
-    const errorMsg = document.querySelector('.no-result-message');
-    errorMsg.classList.add('hidden')
+      
       matchingCities.appendChild(li);
     });
 
   } catch (error) {
-     
+  
     console.error("Error:", error);
   }
 });
-
-cityInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Backspace' || e.key === 'Delete') {
-    const errorMsg = document.querySelector('.no-result-message');
-    errorMsg.classList.add('hidden')
-  } else {
-        errorMsg.classList.remove('hidden')
-  }
-})
